@@ -1,0 +1,46 @@
+.heading {
+  background: url(/assets/backgroundHeader.png);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading .logo {
+  width: 46%;
+  padding: 2rem 3rem;
+}
+
+.heading .logo img {
+  width: 90%;
+  max-width: 350px;
+  margin-bottom: 2rem;
+}
+
+.heading .imageComputer{
+  max-width: 32rem;
+  width: 40%;
+}
+
+.heading p {
+  font-size: 1.5rem;
+  color: #6BD1FF;
+}
+
+@media (max-width: 576px) {
+  .heading .logo {
+    padding: 2rem;
+  }
+  .heading p {
+    font-size: 1rem
+  }
+}
+
+@media (max-width: 768px) {
+  .heading .logo {
+    width: 90%;
+  }
+  .heading .imageComputer {
+    display: none;
+  }
+}
