@@ -4,7 +4,7 @@
   <p class="authorship"><b>{{thought.authorship}}</b></p>
 
   <div class="action">
-    <button class="buttonEdit">
+    <button class="buttonEdit" routerLink="/pensamentos/editarPensamento/{{thought.id}}">
       <img src="/assets/edit.png" alt="Ícone de editar">
     </button>
     <button class="buttonExclude" routerLink="/pensamentos/excluirPensamento/{{thought.id}}">
