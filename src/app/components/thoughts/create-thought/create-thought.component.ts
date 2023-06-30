@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Thought } from '../thought';
 import { ThoughtService } from '../thought.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-thought',
@@ -9,28 +10,49 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-thought.component.css']
 })
 export class CreateThoughtComponent {
-  thought: Thought = {
-    content: "",
-    authorship: "",
-    model: "model2"
-  }
+  form!: FormGroup;
 
   constructor(
     private service: ThoughtService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
     ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      content: ["", Validators.compose([
+        Validators.required,
+        Validators.pattern(/(.|\s)*\S(.|\s)*/)
+      ])],
+      authorship: ["", Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+      ])],
+      model: ["model1"],
+      favorite: [false]
+    })
+  }
 
   createThought() {
-    alert("Novo pensamento criado");
-    this.service.create(this.thought).subscribe(() => {
-      this.router.navigate(["/"])
-    })
+    if(this.form.valid){
+      this.service.create(this.form.value).subscribe(() => {
+        this.router.navigate(["/"])
+      })
+    } else {
+      return alert("Erro ao criar Pensamento")
+    }
   }
 
   cancelThought(){
     this.router.navigate(["/"])
+  }
+
+  enableButton(): string {
+    if(this.form.valid) {
+      return "button"
+    } else {
+      return "buttonDisabled"
+    }
   }
 
 }

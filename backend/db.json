@@ -1,3 +1,25 @@
 {
-  "thoughts": []
+  "thoughts": [
+    {
+      "content": "Lorem Ipsun",
+      "authorship": "ads",
+      "model": "model3",
+      "id": 2,
+      "favorite": false
+    },
+    {
+      "content": "Dev C++",
+      "authorship": "Diovane",
+      "model": "model1",
+      "id": 1,
+      "favorite": true
+    },
+    {
+      "content": "Lorem Ipsun",
+      "authorship": "ads",
+      "model": "model3",
+      "id": 3,
+      "favorite": false
+    }
+  ]
 }

@@ -14,6 +14,7 @@ export class ExcludeThoughtComponent {
     content: "",
     authorship: "",
     model: "",
+    favorite: false,
   }
 
   constructor(

@@ -1,26 +1,33 @@
 <section class="container edit-thought ff-inter">
   <header class="header">
-    <h2>Adicione um <br>pensamento novo:</h2>
+    <h2>Edite seu pensamento:</h2>
   </header>
-  <form>
+  <form [formGroup]="form" *ngIf="form">
     <label for="thought">Pensamento</label>
     <input
       type="textarea"
       class="input"
       id="thought"
-      name="thought"
+      formControlName="content"
       placeholder="Digite o pensamento"
-      [(ngModel)]="thought.content"
     >
+    <div class="messageError" *ngIf="form.get('content')?.errors && form.get('content')?.touched">
+      Pensamento é obrigatório!
+    </div>
     <label for="authorship">Autoria ou fonte</label>
     <input
       type="text"
       class="input"
       id="authorship"
-      name="authorship"
+      formControlName="authorship"
       placeholder="Digite a autoria ou fonte"
-      [(ngModel)]="thought.authorship"
       >
+      <div class="messageError" *ngIf="form.get('authorship')?.errors?.['required'] && form.get('authorship')?.touched">
+        Autoria é obrigatório!
+      </div>
+      <div class="messageError" *ngIf="form.get('authorship')?.errors?.['minlength'] && form.get('authorship')?.touched">
+        Autoria precisa ter no mínimo 3 caracteres!
+      </div>
     <label for="model">Selecione o modelo do card:</label>
     <div class="containerRadio">
       <div class="radioModel">
@@ -29,8 +36,7 @@
             type="radio"
             id="model1"
             value="model1"
-            name="modelCard"
-            [(ngModel)]="thought.model"
+            formControlName="model"
           >
           <div class="customRadio">
             <span></span>
@@ -40,8 +46,8 @@
         Prévia:
         <div class="model model1 ff-roboto-mono">
           <img src="../../../../assets/model1.png" alt="Aspas azuis">
-          <p class="content">{{thought.content}}</p>
-          <p class="authorship"><b>{{thought.authorship}}</b></p>
+          <p class="content">{{ form.get('content')?.value }}</p>
+          <p class="authorship"><b>{{ form.get('authorship')?.value }}</b></p>
         </div>
       </div>
 
@@ -51,8 +57,7 @@
             type="radio"
             id="model2"
             value="model2"
-            name="modelCard"
-            [(ngModel)]="thought.model"
+            formControlName="model"
           >
           <div class="customRadio">
             <span></span>
@@ -62,8 +67,8 @@
         Prévia:
         <div class="model model2 ff-roboto-mono">
           <img src="../../../../assets/model2.png" alt="Aspas azul claro">
-          <p class="content">{{thought.content}}</p>
-          <p class="authorship"><b>{{thought.authorship}}</b></p>
+          <p class="content">{{ form.get('content')?.value }}</p>
+          <p class="authorship"><b>{{ form.get('authorship')?.value }}</b></p>
         </div>
       </div>
 
@@ -73,8 +78,7 @@
             type="radio"
             id="model3"
             value="model3"
-            name="modelCard"
-            [(ngModel)]="thought.model"
+            formControlName="model"
           >
           <div class="customRadio">
             <span></span>
@@ -84,13 +88,20 @@
         Prévia:
         <div class="model model3 ff-roboto-mono">
           <img src="../../../../assets/model3.png" alt="Aspas verdes">
-          <p class="content">{{thought.content}}</p>
-          <p class="authorship"><b>{{thought.authorship}}</b></p>
+          <p class="content">{{ form.get('content')?.value }}</p>
+          <p class="authorship"><b>{{ form.get('authorship')?.value }}</b></p>
         </div>
       </div>
     </div>
     <div class="action">
-      <button (click)="editThought()" class="button">Salvar</button>
+      <button
+      [disabled]="!form.valid"
+      (click)="editThought()"
+      class="button"
+      [ngClass]="enableButton()"
+      >
+        Salvar
+      </button>
       <button (click)="cancelThought()" class="button">Cancelar</button>
     </div>
   </form>

@@ -6,6 +6,7 @@
 }
 
 .button {
+  cursor: pointer;
   margin: 5px;
   margin-top: 70px;
   width: 200px;
@@ -131,4 +132,19 @@ input[type='radio']:checked+.customRadio {
 
 input[type='radio']:checked+.customRadio span {
   background: #154580;
+}
+
+.messageError {
+  font-size: 12px;
+  margin-left: 5px;
+  color: red;
+  margin-top: -25px;
+  margin-bottom: 20px;
+}
+
+.buttonDisabled {
+  cursor: not-allowed;
+  margin: 5px;
+  margin-top: 70px;
+  width: 200px;
 }
